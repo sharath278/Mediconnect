@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-800;
+  }
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+}
