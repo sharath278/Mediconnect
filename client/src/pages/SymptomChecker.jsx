@@ -81,9 +81,9 @@ const SymptomChecker = () => {
             time,
             problemDescription: description
         });
-        alert('Appointment booked successfully!');
-        setIsModalOpen(false);
-        navigate('/dashboard');
+        // alert('Appointment booked successfully!'); // Handled by BookingModal
+        // setIsModalOpen(false); // Handled by BookingModal
+        // navigate('/dashboard'); // Handled by BookingSuccess component
     };
 
     return (

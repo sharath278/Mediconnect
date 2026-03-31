@@ -37,15 +37,16 @@ const Doctors = () => {
 
     const handleBookingSubmit = async (bookingData) => {
         const { date, time, description } = bookingData;
-        // The modal handles the try/catch for the API call to show specific errors
+        // The modal handles the try/catch and success UI
+        // We just need to trigger the API call here which the modal calls
         await api.post('/appointments/book', {
             doctorId: selectedDoctor._id,
             date,
             time,
             problemDescription: description
         });
-        alert('Appointment booked successfully!');
-        setIsModalOpen(false);
+        // alert('Appointment booked successfully!'); // Handled by BookingModal
+        // setIsModalOpen(false); // Handled by BookingModal
     };
 
     const filteredDoctors = doctors.filter(doc =>

@@ -31,6 +31,12 @@ const analyzeSymptoms = async (req, res) => {
             riskLevel = "Medium";
             specialization = "Neurologist";
         }
+       else if (lowerSymptoms.includes('legpain') && (lowerSymptoms.includes('handpain') || lowerSymptoms.includes('bone'))) {
+    diagnosis = "Possible Musculoskeletal or Nerve-related Issue";
+    recommendation = "Take rest, avoid heavy physical activity, and apply pain relief if needed. Consult a doctor if pain persists or worsens.";
+    riskLevel = "Medium";
+    specialization = "Orthopedic or Neurologist";
+}
         else if (lowerSymptoms.includes('fever') && lowerSymptoms.includes('headache')) {
             diagnosis = "Possible Viral Fever or Flu";
             recommendation = "Stay hydrated, take rest, and monitor temperature.";

@@ -51,7 +51,7 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Doctor" className="rounded-3xl shadow-2xl object-cover h-[500px] w-full" />
+                            <img src="https://plus.unsplash.com/premium_photo-1675807264002-74250202f195?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Doctor" className="rounded-3xl shadow-2xl object-cover h-[500px] w-full" />
 
                             <div className="bg-white p-4 rounded-2xl shadow-lg flex items-center gap-4 absolute bottom-10 -right-8">
                                 <div className="flex -space-x-2">
