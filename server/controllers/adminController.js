@@ -33,12 +33,16 @@ const approveDoctor = async (req, res) => {
         const { doctorId, status } = req.body;
         const doctor = await Doctor.findByIdAndUpdate(doctorId, { status }, { new: true });
 
-        // Also update the User role to 'doctor' if it wasn't already?
-        // logic: if approved, ensure user role is 'doctor'
-        const user = await User.findById(doctor.userId);
-        if (user && status === 'approved') {
-            user.role = 'doctor';
-            await user.save();
+        if (!doctor) {
+            return res.status(404).json({ success: false, message: 'Doctor not found' });
+        }
+
+        if (doctor.userId && status === 'approved') {
+            const user = await User.findById(doctor.userId);
+            if (user) {
+                user.role = 'doctor';
+                await user.save();
+            }
         }
 
         res.status(200).json({
@@ -47,7 +51,7 @@ const approveDoctor = async (req, res) => {
             data: doctor
         });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error approving doctor', error });
+        res.status(500).json({ success: false, message: 'Error approving doctor', error: error.message });
     }
 };
 
@@ -121,18 +125,16 @@ const deleteDoctor = async (req, res) => {
     try {
         const doctor = await Doctor.findById(req.params.id);
         if (doctor) {
-            // Optionally delete the user too? 
-            // Let's keep the user but maybe change role or delete user too.
-            // Requirement says "Admin can delete doctors". Usually implies removing the profile.
-            // Let's delete the user account too to be clean.
-            await User.findByIdAndDelete(doctor.userId);
+            if (doctor.userId) {
+                await User.findByIdAndDelete(doctor.userId);
+            }
             await doctor.deleteOne();
             res.status(200).json({ success: true, message: 'Doctor deleted' });
         } else {
             res.status(404).json({ message: 'Doctor not found' });
         }
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error deleting doctor', error });
+        res.status(500).json({ success: false, message: 'Error deleting doctor', error: error.message });
     }
 };
 

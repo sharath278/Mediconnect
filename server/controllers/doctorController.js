@@ -15,29 +15,21 @@ const applyDoctor = async (req, res) => {
 
         const newDoctor = new Doctor({
             ...req.body,
+            userId: req.user._id,
             status: 'pending' // Default status
         });
         await newDoctor.save();
-
-        // Update user role to indicate they have applied? 
-        // Or just keep them as 'doctor' role but check doctorModel status.
-
-        // Let's verify if the User indeed exists as 'doctor' role or if we should switch it.
-        // For simplicity, we assume the user registered as a doctor role user.
-
-        const adminUser = await User.findOne({ role: 'admin' });
-        // In a real app, send notification to admin
 
         res.status(201).json({
             success: true,
             message: 'Doctor account applied successfully',
         });
     } catch (error) {
-        console.log(error);
+        console.error('Error applying for doctor:', error);
         res.status(500).json({
             success: false,
             message: 'Error while applying for doctor',
-            error
+            error: error.message
         });
     }
 };

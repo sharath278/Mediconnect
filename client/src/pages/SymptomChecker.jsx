@@ -53,7 +53,16 @@ const SymptomChecker = () => {
 
     // Filter doctors based on recommended specialization
     const recommendedDoctors = result
-        ? doctors.filter(doc => doc.specialization.toLowerCase() === result.specialization.toLowerCase() || doc.specialization.toLowerCase() === 'general physician')
+        ? doctors.filter(doc => {
+            const docSpec = (doc.specialization || '').toLowerCase();
+            const recSpec = (result.specialization || '').toLowerCase();
+            return (
+                docSpec === recSpec ||
+                recSpec.includes(docSpec) ||
+                docSpec.includes(recSpec) ||
+                docSpec.includes('general')
+            );
+        })
         : [];
 
     const handleBook = (doctorId) => {

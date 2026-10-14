@@ -102,7 +102,7 @@ const Doctors = () => {
                                         <span className="font-semibold">Contact:</span> {doctor.phone || 'N/A'}
                                     </p>
                                     <p className="text-sm text-gray-500 mt-1">
-                                        Consultation Fee: <span className="font-semibold text-gray-900">${doctor.feesPerCunsultation}</span>
+                                        Consultation Fee: <span className="font-semibold text-gray-900">₹{doctor.feesPerCunsultation}</span>
                                     </p>
                                 </div>
                                 <div className="mt-6">
@@ -117,6 +117,13 @@ const Doctors = () => {
                         </div>
                     ))}
                 </div>
+
+                {filteredDoctors.length === 0 && (
+                    <div className="text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-100 max-w-md mx-auto mt-6">
+                        <p className="text-gray-500 font-medium">No doctors found matching "{searchTerm}"</p>
+                        <p className="text-xs text-gray-400 mt-1">Try searching by general physician or a different specialization.</p>
+                    </div>
+                )}
             </div>
 
             <BookingModal

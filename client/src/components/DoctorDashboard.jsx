@@ -29,12 +29,6 @@ const DoctorDashboard = () => {
     };
 
     const pendingAppointments = appointments.filter(apt => apt.status === 'pending');
-    const todayAppointments = appointments.filter(apt => {
-        // Simple string matching for demo purpose, ideally should use Date objects
-        // Assuming apt.date is YYYY-MM-DD or similar
-        const today = new Date().toISOString().split('T')[0];
-        return apt.date === today && apt.status === 'approved';
-    });
     const totalPatients = new Set(appointments.map(apt => apt.userId)).size; // Approximate unique patients
 
     return (

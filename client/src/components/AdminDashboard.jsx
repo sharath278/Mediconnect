@@ -15,18 +15,34 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         try {
             const doctorsRes = await api.get('/admin/doctors');
-            setDoctors(doctorsRes.data.data);
+            setDoctors(doctorsRes.data.data || []);
             const usersRes = await api.get('/admin/users');
-            setUsers(usersRes.data.data);
+            setUsers(usersRes.data.data || []);
             const appointmentsRes = await api.get('/appointments/all');
-            setAppointments(appointmentsRes.data.data);
+            setAppointments(appointmentsRes.data.data || []);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     };
 
     useEffect(() => {
-        fetchData();
+        let isMounted = true;
+        const load = async () => {
+            try {
+                const doctorsRes = await api.get('/admin/doctors');
+                if (isMounted) setDoctors(doctorsRes.data.data || []);
+                const usersRes = await api.get('/admin/users');
+                if (isMounted) setUsers(usersRes.data.data || []);
+                const appointmentsRes = await api.get('/appointments/all');
+                if (isMounted) setAppointments(appointmentsRes.data.data || []);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        load();
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     const handleApprove = async (doctorId) => {

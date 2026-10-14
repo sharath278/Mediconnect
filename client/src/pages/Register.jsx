@@ -41,6 +41,7 @@ const Register = () => {
                         </Link>
                     </p>
                 </div>
+                {error && <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">{error}</div>}
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="rounded-md shadow-sm space-y-3">
                         <div>

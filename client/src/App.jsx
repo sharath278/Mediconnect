@@ -12,10 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Doctors from './pages/Doctors';
 import SymptomChecker from './pages/SymptomChecker';
 
-console.log('App.jsx: initializing');
-
 function App() {
-  console.log('App.jsx: rendering');
   return (
     <AuthProvider>
       <Router>
@@ -23,13 +20,13 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} /> {/* Add About route */}
+            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/doctors" element={<Doctors />} />
             <Route path="/symptom-checker" element={<SymptomChecker />} />
-            {/* Add more routes here */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </div>
       </Router>
